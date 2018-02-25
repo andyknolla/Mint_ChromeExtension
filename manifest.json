@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+
+  "name": "Mint dupe finder",
+  "description": "This extension is for Mint.com or similar sites. It highlights potential duplicate transactions on the current page.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "dupe-icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Find stupid duplicates"
+  },
+  "background": {
+    "scripts": ["eventPage.js"]
+  },
+  /* Use content_scripts field for automatically injecting js into any page that matches */
+  /*"content_scripts": [
+    {
+      "matches": ["https://mint.intuit.com/transaction.event"],
+      "js": ["content_script.js"]
+    }
+  ],*/
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://mint.intuit.com/transaction.event",
+    "background"
+  ]
+}
