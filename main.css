@@ -1,0 +1,22 @@
+.marked-duplicate {
+  background: #9C5725;
+}
+.marked-duplicate-match {
+  background: darkSeaGreen;
+}
+
+.unmarked-duplicate {
+  background: brown;
+}
+.unmarked-duplicate-match {
+  background: darkKhaki;
+}
+
+#legend {
+  padding: 10px;
+  margin: 10px;
+}
+
+#legend td {
+  padding:10px;
+}
