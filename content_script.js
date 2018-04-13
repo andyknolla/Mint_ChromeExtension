@@ -15,15 +15,20 @@ groupDuplicates(transactions, duplicates, unique);
 splitDuplicates(duplicates, firstHalf, secondHalf);
 
 highlightElements(firstHalf, secondHalf);
+attachDupeHandlers(duplicates);
 
 function groupDuplicates(elementsArray, dupeArray, uniqueArray) {
   let arrLength = elementsArray.length;
 
   for(var i = 1; i < arrLength; i++) {
+    let matchingPair = [];  // pass this to scan, add the first dupe to it, pass it back, add the other dupe to it, then pass that array with matched pair into the duplicates array...
+
     let date = elementsArray[i].getElementsByClassName('date')[0].innerText;
     let price = elementsArray[i].getElementsByClassName('money')[0].innerText;
 
     let isDupe = scanForDuplicates(uniqueArray, date, price); // boolean
+//TODO
+// mark the first dupe somehow...
 
     isDupe ? dupeArray.push(elementsArray[i]) : uniqueArray.push(elementsArray[i]);
 
@@ -36,6 +41,8 @@ function scanForDuplicates(arrForUniques, date, price ) {
     let dupePrice = arrForUniques[j].getElementsByClassName('money')[0].innerText;
     let dupeDate = arrForUniques[j].getElementsByClassName('date')[0].innerText;
     if( price != '$0.00' && price === dupePrice && date === dupeDate ) {
+//TODO
+// mark the matching dupe somehow...
 
       duplicates.push(arrForUniques[j]);
       return true;
@@ -65,7 +72,10 @@ function highlightElements(arrayOfDuplicates, arrayOfDuplicates2) {
 
 // TODO Refactor - less duplicate code
 // using two matching arrays
+
+
   for (var i = 0; i < arrayOfDuplicates.length; i++) {
+  // let marked = some boolean expression
     if( arrayOfDuplicates[i].getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
       arrayOfDuplicates[i].style.background = '#9C5725';
       arrayOfDuplicates2[i].style.background = 'darkSeaGreen';
@@ -79,6 +89,7 @@ function highlightElements(arrayOfDuplicates, arrayOfDuplicates2) {
       arrayOfDuplicates2[i].style.background = 'darkKhaki';
     }
   }
+
 // using one array:
   // arrOfDuplicates.map( (element) => {
   //   color = 'darkSeaGreen';
@@ -91,8 +102,41 @@ function highlightElements(arrayOfDuplicates, arrayOfDuplicates2) {
   // })
 }
 
+function attachDupeHandlers(arrayOfDuplicates) {
+  let dupeCheckbox = document.getElementById('txnEdit-dup'); // <input>
+  debugger
+  dupeCheckbox.addEventListener('change', () => {
+    console.log('dupe!'); // works!
+
+    let txnId = document.getElementById('txnEdit-txnId').value.substr(0,10);
+    let matchingTr = arrayOfDuplicates.find( (element) => {
+      let txnNumber = element.id.substr(12);
+      return txnId === txnNumber
+    });
+
+    if(dupeCheckbox.checked) {
+      matchingTr.style.background = '#9C5725';
+    }
+    debugger
+  })
+}
+
+
+//TODO Watch unmarked duplicates, change highlight color if user marks-as-duplicate
+// The Edit Details dropdown is a div that is always on the page. It shows up and is positioned based on which transaction is in focus
+
+// *location of the dupe checkbox:
+  // after the main transactions table... div#txnEdit > #txnEdit-form > div > div.buttons > label > input#txnEdit-dup
+
+// Implementation:
+  // Attach click handler (or other appropriate handler... watch for "checked"?) to the dupe checkbox inside of the details div
+  // if it's value changes, get the txn id (input w/ id="txnEdit-txnId"),
+  // * can check if you're dealing w/ a dupe...the details div will have class="duplicate"
+  // Check to see if current txn is a dupe...match up with the <tr>s in my duplicates array(s?)
+
+  // if the current txn is a dupelicate and gets marked as a duplicate, change the corresponding <tr> background color, and its match to the other color
+
 // for testing...
 let duplicateAmounts = duplicates.map( (element) => {
     return element.getElementsByClassName('money')[0].innerText;
 })
-debugger
