@@ -12,11 +12,27 @@ let secondHalf = [];
 
 groupDuplicates(transactions, duplicates, unique);
 
-splitDuplicates(duplicates, firstHalf, secondHalf);
+//splitDuplicates(duplicates, firstHalf, secondHalf);
 
-highlightElements(firstHalf, secondHalf);
+//highlightElements(firstHalf, secondHalf);
 attachDupeHandlers(duplicates);
 
+// preserve
+// function groupDuplicates(elementsArray, dupeArray, uniqueArray) {
+//   let arrLength = elementsArray.length;
+//
+//   for(var i = 1; i < arrLength; i++) {
+//     let date = elementsArray[i].getElementsByClassName('date')[0].innerText;
+//     let price = elementsArray[i].getElementsByClassName('money')[0].innerText;
+//
+//     let isDupe = scanForDuplicates(uniqueArray, date, price); // boolean
+//
+//     isDupe ? dupeArray.push(elementsArray[i]) : uniqueArray.push(elementsArray[i]);
+//
+//   }
+// }
+
+//TODO is uniqueArray (unique) necessary?
 function groupDuplicates(elementsArray, dupeArray, uniqueArray) {
   let arrLength = elementsArray.length;
 
@@ -26,13 +42,18 @@ function groupDuplicates(elementsArray, dupeArray, uniqueArray) {
     let date = elementsArray[i].getElementsByClassName('date')[0].innerText;
     let price = elementsArray[i].getElementsByClassName('money')[0].innerText;
 
+//TODO assign this differently. On 4.12 it is adding the first matched pair for each dupe it finds.
     let isDupe = scanForDuplicates(uniqueArray, date, price); // boolean
+
 //TODO
 // mark the first dupe somehow...
 
-    isDupe ? dupeArray.push(elementsArray[i]) : uniqueArray.push(elementsArray[i]);
-
+    isDupe ? isDupe.push(elementsArray[i]) : uniqueArray.push(elementsArray[i]);
+    if(isDupe) dupeArray.push(isDupe);
+    // if isDupe returns anything (an array w/ an element), add this one too, and then put that array into duplicates
+    debugger
   }
+  debugger
 }
 
 function scanForDuplicates(arrForUniques, date, price ) {
@@ -44,11 +65,27 @@ function scanForDuplicates(arrForUniques, date, price ) {
 //TODO
 // mark the matching dupe somehow...
 
-      duplicates.push(arrForUniques[j]);
-      return true;
+      // return an array with the element in it
+      return [arrForUniques[j]];
+    }
+    else {
+      return false;
     }
   }
 }
+
+// preserve...
+// function scanForDuplicates(arrForUniques, date, price ) {
+//   let arrLength = arrForUniques.length;
+//   for(var j = 0; j < arrLength; j++) {
+//     let dupePrice = arrForUniques[j].getElementsByClassName('money')[0].innerText;
+//     let dupeDate = arrForUniques[j].getElementsByClassName('date')[0].innerText;
+//     if( price != '$0.00' && price === dupePrice && date === dupeDate ) {
+//       duplicates.push(arrForUniques[j]);
+//       return true;
+//     }
+//   }
+// }
 
 // split the duplicates array into two matching arrays so we can differentiate
 // between pairs that have been marked as duplicate and those that haven't
