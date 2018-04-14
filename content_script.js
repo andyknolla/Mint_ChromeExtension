@@ -15,6 +15,7 @@ groupDuplicates(transactions, duplicates, unique);
 //splitDuplicates(duplicates, firstHalf, secondHalf);
 
 //highlightElements(firstHalf, secondHalf);
+highlightElements(duplicates);
 attachDupeHandlers(duplicates);
 
 // preserve
@@ -37,41 +38,42 @@ function groupDuplicates(elementsArray, dupeArray, uniqueArray) {
   let arrLength = elementsArray.length;
 
   for(var i = 1; i < arrLength; i++) {
-    let matchingPair = [];  // pass this to scan, add the first dupe to it, pass it back, add the other dupe to it, then pass that array with matched pair into the duplicates array...
 
     let date = elementsArray[i].getElementsByClassName('date')[0].innerText;
     let price = elementsArray[i].getElementsByClassName('money')[0].innerText;
 
 //TODO assign this differently. On 4.12 it is adding the first matched pair for each dupe it finds.
-    let isDupe = scanForDuplicates(uniqueArray, date, price); // boolean
 
-//TODO
-// mark the first dupe somehow...
+    let matchingPair = scanForDuplicates(uniqueArray, date, price)
 
-    isDupe ? isDupe.push(elementsArray[i]) : uniqueArray.push(elementsArray[i]);
-    if(isDupe) dupeArray.push(isDupe);
-    // if isDupe returns anything (an array w/ an element), add this one too, and then put that array into duplicates
-    debugger
+    if( matchingPair.length > 0 ) {
+
+      matchingPair.push(elementsArray[i]);
+      dupeArray.push(matchingPair);
+    } else {
+      uniqueArray.push(elementsArray[i])
+    }
   }
-  debugger
+
 }
 
-function scanForDuplicates(arrForUniques, date, price ) {
+function scanForDuplicates(arrForUniques, date, price) {
+  let arrayForPairingDuplicates = [];
   let arrLength = arrForUniques.length;
+  const isDupe = (comparePrice, compareDate) => {
+    return price != '$0.00' && comparePrice === price && compareDate === date;
+  }
+
   for(var j = 0; j < arrLength; j++) {
     let dupePrice = arrForUniques[j].getElementsByClassName('money')[0].innerText;
     let dupeDate = arrForUniques[j].getElementsByClassName('date')[0].innerText;
-    if( price != '$0.00' && price === dupePrice && date === dupeDate ) {
-//TODO
-// mark the matching dupe somehow...
 
-      // return an array with the element in it
-      return [arrForUniques[j]];
-    }
-    else {
-      return false;
+    if( isDupe(dupePrice, dupeDate) ) {
+      arrayForPairingDuplicates.push(arrForUniques[j]);
+      arrForUniques.push(arrForUniques[j]);  //
     }
   }
+  return arrayForPairingDuplicates;
 }
 
 // preserve...
@@ -104,28 +106,65 @@ function splitDuplicates(arrayOfDuplicates, firstSet, secondSet) {
   }
 }
 
-function highlightElements(arrayOfDuplicates, arrayOfDuplicates2) {
+function highlightElements(arrayOfDuplicates) {
   let color = 'darkSeaGreen';
 
 // TODO Refactor - less duplicate code
 // using two matching arrays
 
+// using duplicates array full of array pairs of matches  //////////////
+for (var i = 0; i < arrayOfDuplicates.length; i++) {
+  let matchedPair = arrayOfDuplicates[i]
+  let first = matchedPair[0];
+  let second = matchedPair[1];
 
-  for (var i = 0; i < arrayOfDuplicates.length; i++) {
-  // let marked = some boolean expression
-    if( arrayOfDuplicates[i].getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
-      arrayOfDuplicates[i].style.background = '#9C5725';
-      arrayOfDuplicates2[i].style.background = 'darkSeaGreen';
 
-    } else if (arrayOfDuplicates2[i].getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
-      arrayOfDuplicates[i].style.background = 'darkSeaGreen';
-      arrayOfDuplicates2[i].style.background = '#9C5725';
 
-    } else {
-      arrayOfDuplicates[i].style.background = 'brown';
-      arrayOfDuplicates2[i].style.background = 'darkKhaki';
-    }
+  if( first.getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
+    first.style.background = '#9C5725';
+    second.style.background = 'darkSeaGreen';
+  } else if (first.getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
+    first.style.background = 'darkSeaGreen';
+    second.style.background = '#9C5725';
+  } else {
+    first.style.background = 'brown';
+    second.style.background = 'darkKhaki';
   }
+
+
+
+
+  // find elements already marked as duplicate
+  // let markedDuplicate = matchedPair.find((element, index) => {
+  //   return element.getElementsByClassName('cat')[0].innerText === 'Duplicate'
+  // });
+  // debugger
+  //
+  // if(markedDuplicate.length > 0) {
+  //   markedDuplicate[0].style.background = '#9C5725';
+  //   //mark the other one...
+  // }
+  // else, highlight w/ different colors
+  //.style.background = 'darkSeaGreen';
+}
+
+////////////////////////
+
+  // for (var i = 0; i < arrayOfDuplicates.length; i++) {
+  // // let marked = some boolean expression
+  //   if( arrayOfDuplicates[i].getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
+  //     arrayOfDuplicates[i].style.background = '#9C5725';
+  //     arrayOfDuplicates2[i].style.background = 'darkSeaGreen';
+  //
+  //   } else if (arrayOfDuplicates2[i].getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
+  //     arrayOfDuplicates[i].style.background = 'darkSeaGreen';
+  //     arrayOfDuplicates2[i].style.background = '#9C5725';
+  //
+  //   } else {
+  //     arrayOfDuplicates[i].style.background = 'brown';
+  //     arrayOfDuplicates2[i].style.background = 'darkKhaki';
+  //   }
+  // }
 
 // using one array:
   // arrOfDuplicates.map( (element) => {
