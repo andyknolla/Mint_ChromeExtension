@@ -121,14 +121,14 @@ for (var i = 0; i < arrayOfDuplicates.length; i++) {
 
 
   if( first.getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
-    first.style.background = '#9C5725';
-    second.style.background = 'darkSeaGreen';
-  } else if (first.getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
-    first.style.background = 'darkSeaGreen';
-    second.style.background = '#9C5725';
+    first.style.background = 'hsla(0,62%,21%,0.35)';
+    second.style.background = 'hsla(91,66%,14%,0.3)';
+  } else if (second.getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
+    first.style.background = 'hsla(91,66%,14%,0.3)';
+    second.style.background = 'hsla(0,62%,21%,0.35)';
   } else {
-    first.style.background = 'brown';
-    second.style.background = 'darkKhaki';
+    first.style.background = 'hsla(0,46%,49%,1)';
+    second.style.background = 'rgba(146,189,107,1)';
   }
 
 
