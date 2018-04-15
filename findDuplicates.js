@@ -1,29 +1,14 @@
 
-// if(typeof(table) === 'undefined') {
-  console.log('new run');
-  var table = document.getElementById('transaction-list-body');
-  var transactions = table.getElementsByClassName('firstdate');
+var table = document.getElementById('transaction-list-body');
+var transactions = table.getElementsByClassName('firstdate');
 
-  var unique = [];
-  unique.push(transactions[0]);
+var unique = [];
+unique.push(transactions[0]);
 
-  var duplicates = [];
+var duplicates = [];
 
-  var firstHalf = [];
-  var secondHalf = [];
-
-// } else {
-//   table = document.getElementById('transaction-list-body');
-//   transactions = table.getElementsByClassName('firstdate');
-//
-//   unique = [];
-//   unique.push(transactions[0]);
-//
-//   duplicates = [];
-//
-//   firstHalf = [];
-//   secondHalf = [];
-// }
+var firstHalf = [];
+var secondHalf = [];
 
 groupDuplicates(transactions, duplicates, unique);
 
@@ -36,7 +21,7 @@ attachDupeHandlers(duplicates);
 dupeCheckComplete();
 
 function dupeCheckComplete() {
-  
+
 }
 
 //TODO is uniqueArray (unique) necessary?
@@ -101,40 +86,23 @@ function highlightElements(arrayOfDuplicatePairs) {
 // TODO Refactor - less duplicate code
 
 // using duplicates array full of array pairs of matches  //////////////
-for (var i = 0; i < arrayOfDuplicatePairs.length; i++) {
-  let matchedPair = arrayOfDuplicatePairs[i]
-  let first = matchedPair[0];
-  let second = matchedPair[1];
+  for (var i = 0; i < arrayOfDuplicatePairs.length; i++) {
+    let matchedPair = arrayOfDuplicatePairs[i]
+    let first = matchedPair[0];
+    let second = matchedPair[1];
 
-  if( first.getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
-    first.style.background = 'hsla(0,62%,21%,0.35)';
-    second.style.background = 'hsla(91,66%,14%,0.3)';
-  } else if (second.getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
-    first.style.background = 'hsla(91,66%,14%,0.3)';
-    second.style.background = 'hsla(0,62%,21%,0.35)';
-  } else {
-    first.style.background = 'hsla(0,46%,49%,1)';
-    second.style.background = 'hsla(91,38%,58%,1)';
+    if( first.getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
+      first.style.background = 'hsla(0,62%,21%,0.35)';
+      second.style.background = 'hsla(91,66%,14%,0.3)';
+    } else if (second.getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
+      first.style.background = 'hsla(91,66%,14%,0.3)';
+      second.style.background = 'hsla(0,62%,21%,0.35)';
+    } else {
+      first.style.background = 'hsla(0,46%,49%,1)';
+      second.style.background = 'hsla(91,38%,58%,1)';
+    }
   }
-}
 
-////////////////////////
-
-  // for (var i = 0; i < arrayOfDuplicates.length; i++) {
-  // // let marked = some boolean expression
-  //   if( arrayOfDuplicates[i].getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
-  //     arrayOfDuplicates[i].style.background = '#9C5725';
-  //     arrayOfDuplicates2[i].style.background = 'darkSeaGreen';
-  //
-  //   } else if (arrayOfDuplicates2[i].getElementsByClassName('cat')[0].innerText === 'Duplicate' ) {
-  //     arrayOfDuplicates[i].style.background = 'darkSeaGreen';
-  //     arrayOfDuplicates2[i].style.background = '#9C5725';
-  //
-  //   } else {
-  //     arrayOfDuplicates[i].style.background = 'brown';
-  //     arrayOfDuplicates2[i].style.background = 'darkKhaki';
-  //   }
-  // }
 }
 
 function attachDupeHandlers(arrayOfMatchedPairs) {
@@ -200,8 +168,6 @@ function attachDupeHandlers(arrayOfMatchedPairs) {
   // Check to see if current txn is a dupe...match up with the <tr>s in my duplicates array(s?)
 
   // if the current txn is a dupelicate and gets marked as a duplicate, change the corresponding <tr> background color, and its match to the other color
-
-// clear initial variables
 
 
 // for testing...

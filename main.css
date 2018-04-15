@@ -23,16 +23,47 @@ body {
   margin:5px 10px;
   border-radius: 3px;
 }
-#container {
+
+#alert {
+  background: #fcff52;
+  margin-bottom:15px;
+  height: 40px;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 5px 5px;
+  box-shadow: gray 3px 3px 10px;
+  display: none;
+  animation: pulse 3.1s ease-out;
+
+}
+@keyframes pulse {
+  0% {
+    background-color: #fcff52;
+    opacity: 0.5;
+    display: none;
+  }
+  100% {
+    background-color: #FF4136;
+    opacity: 1;
+    display: block;
+  }
+}
+
+#legend {
+  display: none;
+  animation: slide-down .3s ease-out;
   width: 170px;
   padding: 1px 0;
 }
-#legend td {
-  padding:10px;
+@-webkit-keyframes slide-down {
+      0% { opacity: 0; -webkit-transform: translateY(-30%); }
+    100% { opacity: 1; -webkit-transform: translateY(0); }
 }
-#legend tr {
-  height: 30px;
+@-moz-keyframes slide-down {
+      0% { opacity: 0; -moz-transform: translateY(-30%); }
+    100% { opacity: 1; -moz-transform: translateY(0); }
 }
+
 .popup-title {
   font-weight: 300;
   color: hsl(0,0%,20%);
@@ -44,8 +75,11 @@ body {
   display: flex;
   justify-content: space-between;
   margin: 5px 10px;
+  width: 150px;
 }
+/*TODO copy my colors to other browser prefixes */
 #findDuplicates, #clearHighlights {
+   width: 70px;
    border-top: 1px solid #96d1f8;
    background: #65a9d7;
    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
@@ -69,7 +103,7 @@ body {
    font-weight: 300;
    text-decoration: none;
    vertical-align: middle;
-   }
+}
 #findDuplicates:hover, #clearHighlights:hover {
    border-top-color: #28597a;
    background: #28597a;
@@ -78,5 +112,4 @@ body {
 #findDuplicates:active, #clearHighlights:active {
    border-top-color: #1b435e;
    background: #1b435e;
-   }
 }
