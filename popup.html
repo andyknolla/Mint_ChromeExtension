@@ -1,38 +1,43 @@
 <!doctype html>
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
+    <title>Mint duplicate transaction highlighter</title>
     <link type="text/css" rel="stylesheet" href="main.css">
     <script src="popup.js"></script>
   </head>
 
   <body>
-    <h1>Mint Duplicate Transaction Highlighter</h1>
+    <h1 class='popup-title'>Mint Duplicate Highlighter</h1>
     <div id='container'>
-      <table id='legend'>
+      <div class='legend-item unmarked-duplicate'>Unmarked</div>
+      <div class='legend-item unmarked-duplicate-match'>Unmarked match</div>
+      <br>
+      <div class='legend-item marked-duplicate'>Marked</div>
+      <div class='legend-item marked-duplicate-match'>Marked match</div>
+      <!-- <table id='legend'>
         <thead>
           <th>Label</th>
           <th>Color</th>
         </thead>
         <tbody>
           <tr>
-            <td>Marked Duplicate</td>
+            <td>Marked</td>
             <td class='marked-duplicate'>DarkChocolate</td>
           </tr>
           <tr>
-            <td>Marked Duplicate Match</td>
+            <td>Marked Match</td>
             <td class='marked-duplicate-match'>DarkSeaGreen</td>
           </tr>
           <tr>
-            <td>Unmarked duplicate</td>
+            <td>Unmarked</td>
             <td class='unmarked-duplicate'>Brown</td>
           </tr>
           <tr>
-            <td>Unmarked Duplicate Match</td>
+            <td>Unmarked Match</td>
             <td class='unmarked-duplicate-match'>DarkKhaki</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
   </body>
 </html>

@@ -1,22 +1,40 @@
+body {
+  background: linear-gradient(hsl(171,29%,73%), hsl(180,60%,94%) 44%);
+}
+
 .marked-duplicate {
-  background: #9C5725;
+  background: hsla(0,62%,21%,0.35);
+  color: hsla(0,0%,78%,1);
 }
 .marked-duplicate-match {
-  background: darkSeaGreen;
+  background: hsla(91,66%,14%,0.3);
 }
 
 .unmarked-duplicate {
-  background: brown;
+  background: hsla(0,46%,49%,1);
 }
 .unmarked-duplicate-match {
-  background: darkKhaki;
+  background: hsla(91,38%,58%,1);
 }
 
-#legend {
-  padding: 10px;
-  margin: 10px;
+.legend-item {
+  height: 25px;
+  padding: 5px 10px 0;
+  margin:5px 10px;
 }
-
+#container {
+  width: 170px;
+  padding: 1px 0;
+}
 #legend td {
   padding:10px;
+}
+#legend tr {
+  height: 30px;
+}
+.popup-title {
+  font-weight: 300;
+  color: hsl(0,0%,20%);
+  font-size: 1.6em;
+  padding-left: 10px;
 }

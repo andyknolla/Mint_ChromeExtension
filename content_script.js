@@ -128,7 +128,7 @@ for (var i = 0; i < arrayOfDuplicates.length; i++) {
     second.style.background = 'hsla(0,62%,21%,0.35)';
   } else {
     first.style.background = 'hsla(0,46%,49%,1)';
-    second.style.background = 'rgba(146,189,107,1)';
+    second.style.background = 'hsla(91,38%,58%,1)';
   }
 
 
