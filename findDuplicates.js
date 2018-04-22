@@ -3,7 +3,7 @@ var table = document.getElementById('transaction-list-body');
 var transactions = table.getElementsByClassName('firstdate');
 
 
-chrome.runtime.sendMessage('dirka');
+
 
 
 var unique = [];
@@ -85,6 +85,9 @@ function splitDuplicates(arrayOfDuplicates, firstSet, secondSet) {
 }
 
 function highlightElements(arrayOfDuplicatePairs) {
+
+  // tell extension how many duplicates
+  chrome.runtime.sendMessage({ message: 'dirka', numberOfDuplicates: arrayOfDuplicatePairs.length});
   let color = 'darkSeaGreen';
 
 // TODO Refactor - less duplicate code

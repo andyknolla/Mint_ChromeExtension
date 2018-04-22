@@ -1,5 +1,13 @@
 
-chrome.runtime.onMessage.addListener(console.log('recieved a message!'));
+var dupeCheckResult;
+
+function respondToMessage(message) {
+  console.log('message.content is ', message.content, 'number of dupes is ', message.numberOfDuplicates);
+  dupeCheckResult = message.numberOfDuplicates;
+
+};
+
+chrome.runtime.onMessage.addListener( respondToMessage );
 
 
 
@@ -12,19 +20,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   document.getElementById('findDuplicates').addEventListener('click', () => {
-
     var legend = document.getElementById('legend');
-    var highlightNotification = document.getElementById('highlightNotification');
 
     legend.style.display = 'block';
+
+    chrome.tabs.executeScript(null, { file: "jquery-3.3.1.min.js" }, function() {
+        chrome.tabs.executeScript(null, { file: "findDuplicates.js" });
+    });
+
+
+    var highlightNotification = document.getElementById('highlightNotification');
+
+
+    // Change text in highlightNotification, based on message from content_script
+
+    var notificationText = 'No duplicates found';
+    if( dupeCheckResult > 0 ) {
+      notificationText = `${dupeCheckResult} duplicates highlighted!`
+    }
+    highlightNotification.innerHTML = notificationText;
+
+
     fadeIn(highlightNotification);
 
     window.setTimeout( () => {
       fadeOut(highlightNotification);
     }, 3000)
-    chrome.tabs.executeScript(null, { file: "jquery-3.3.1.min.js" }, function() {
-        chrome.tabs.executeScript(null, { file: "findDuplicates.js" });
-    });
+
+
   })
 
 // For clearing highlights
