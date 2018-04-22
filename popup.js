@@ -1,30 +1,37 @@
 
+chrome.runtime.onMessage.addListener(console.log('recieved a message!'));
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
-  // run instantly for testing
-  console.log(window);
-  chrome.tabs.executeScript(null, { file: 'findDuplicates.js' });
+
+// run instantly for testing
+// console.log(window);
+//chrome.tabs.executeScript(null, { file: 'findDuplicates.js' });
+// ^ comment out after testing
+
 
   document.getElementById('findDuplicates').addEventListener('click', () => {
 
     var legend = document.getElementById('legend');
-    var alert = document.getElementById('alert');
+    var highlightNotification = document.getElementById('highlightNotification');
 
-    fadeIn(alert);
-
-    // alert.style.display = 'block';
     legend.style.display = 'block';
+    fadeIn(highlightNotification);
 
-//TODO uncomment after testing
     window.setTimeout( () => {
-      fadeOut(alert);
-      // alert.style.display = 'none';
+      fadeOut(highlightNotification);
     }, 3000)
-
-    chrome.tabs.executeScript(null, { file: 'findDuplicates.js' });
+    chrome.tabs.executeScript(null, { file: "jquery-3.3.1.min.js" }, function() {
+        chrome.tabs.executeScript(null, { file: "findDuplicates.js" });
+    });
   })
 
+// For clearing highlights
   document.getElementById('clearHighlights').addEventListener('click', () => {
-    chrome.tabs.executeScript(null, { file: 'clearHighlights.js' });
+    chrome.tabs.executeScript(null, { file: "jquery-3.3.1.min.js" }, function() {
+        chrome.tabs.executeScript(null, { file: "clearHighlights.js" });
+    });
   })
 });
 

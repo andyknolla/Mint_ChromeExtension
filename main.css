@@ -24,7 +24,7 @@ body {
   border-radius: 3px;
 }
 
-#alert {
+#highlightNotification {
   background: #fcff52;
   margin-bottom:15px;
   height: 40px;

@@ -17,7 +17,7 @@
   /*"content_scripts": [
     {
       "matches": ["https://mint.intuit.com/transaction.event"],
-      "js": ["https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js", "content_script.js"]
+      "js": ["https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js", "jquery-3.3.1.min.js", "content_script.js", "clearHighlights.js"]
     }
   ],*/
   "permissions": [

@@ -2,6 +2,10 @@
 var table = document.getElementById('transaction-list-body');
 var transactions = table.getElementsByClassName('firstdate');
 
+
+chrome.runtime.sendMessage('dirka');
+
+
 var unique = [];
 unique.push(transactions[0]);
 
