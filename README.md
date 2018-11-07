@@ -1,5 +1,5 @@
-#Dupe-highlighter
-##A Chrome extension that finds and highlights duplicate transactions on Mint.com's Transactions page.
+# Dupe-highlighter
+## A Chrome extension that finds and highlights duplicate transactions on Mint.com's Transactions page.
 
 ### Development:
 #### How to run locally
