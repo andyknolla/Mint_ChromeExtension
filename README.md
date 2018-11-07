@@ -22,4 +22,4 @@
 
 ##### Clearing highlights, especially on pagination
 * Pagination element is a <ul> w/ id 'transaction-paging'
-*
+* Test commit
